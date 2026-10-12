@@ -19,13 +19,16 @@ Edit **`js/config.js`** for the owner’s full name, display name, title, locati
 Edit **`js/data.js`** for all primary copy, services, industries, technologies, products, and project outlines:
 
 - `content`: home-page copy, navigation labels, process steps, contact choices, industry and technology strips.
+- `showcase`: hero, two collection introductions, and about-section copy.
+- `aiApplications`: six interactive AI previews, from Novo Agent to custom chatbots, with their project links.
+- `softwareStories`: headlines, visual styles and categories for the 15-product storyboard. Add matching entries here when adding products.
 - `pillars`: service names and descriptions.
 - `solutions`: `id`, `title`, `category`, `summary`, `modules[]`, `features[]`, `integrations[]`, `stack[]`. Adding an entry automatically creates a catalog card, detail page and command-palette entry.
 - `caseStudies`: `id`, `title`, `pillar`, `industry`, anonymized `client`, `summary`, `problem`, `solution`, `architecture[]`, `stack[]`, `metrics[]`, `cover`, and `status`. Images belong in `assets/` and paths start with `./assets/`.
 
 The supplied cases are **project outlines**, not claims of delivered results. Their architecture and suggested technology are illustrative. Replace the descriptions with verified implementation details before presenting them as completed case studies. Replace bracketed metrics only when verified. A numeric `metrics[].value` animates when visible; placeholder strings are never converted to made-up numbers. Update each metric’s `label` and project `status` too. Integration names identify potential scope, not regulatory approval or certification.
 
-`solution.html?id=emr` and `case.html?id=smartlab` render directly from the data. Unknown IDs show a helpful not-found state. The home explorer features EMR, CRM, HRMS, ERP and Finance; the catalog includes all 15 solutions.
+`solution.html?id=emr` and `case.html?id=smartlab` render directly from the data. Unknown IDs show a helpful not-found state. The homepage has two main collections: AI-based applications and software applications. All 15 software products appear in a selectable storyboard with illustrated interface concepts; the catalog provides the complete product details. Preview interfaces use sample data and do not represent connected applications.
 
 ### Search and social metadata
 
@@ -79,11 +82,12 @@ The root `404.html` works for missing sibling URLs. On deeply nested nonexistent
 ## Interactions and accessibility
 
 - Command palette: **⌘K / Ctrl+K**, fuzzy search, arrows to navigate, Enter to open, Escape to close. Native dialog focus trapping and focus restoration.
-- Solution tabs: Left/Right, Home/End; click or keyboard focus on a module traces its connection. Select a module to open its detail. All 21 EMR modules are included; the mobile diagram becomes a connected list.
-- Service panels: pointer hover or button/keyboard activation. Mobile panels stack.
+- AI application tabs: pointer, arrow keys and Home/End. Desktop uses a vertical selector; narrow screens use a horizontal selector. Search can deep-link to a specific application.
+- Software storyboard: all 15 products, previous/next controls, arrow keys, Home/End and horizontal touch swipes. Selection updates the preview, detail link and accessible position announcement. It never auto-advances.
+- Dark/light mode: the header toggle persists the choice across pages and reloads using localStorage. Dark is the default. Switching still works for the current page if storage is blocked.
 - Header tracks scroll direction, section state and keyboard focus. Native cursor throughout.
-- “Pause motion” stops decorative CSS, SVG and WebGL animation. Reduced-motion preference disables scramble, parallax, reveals and smooth scrolling and uses a static CSS aurora. Native scrolling and content remain available without the optional libraries.
-- Canvas uses layered simplex/FBM shader planes, particles and a perspective grid. Pixel ratio is capped at 1.75, with fewer planes on mobile; it pauses when hidden or outside the hero viewport. Device tilt is used only if already available, without requesting permission.
+- “Pause motion” stops decorative CSS, SVG and WebGL animation. Reduced-motion preference disables decorative movement, transitions and smooth scrolling and uses a static CSS fluid background. Native scrolling and content remain available without the optional libraries.
+- The hero uses a flowing, domain-warped color shader with a CSS fallback. Pixel ratio is capped at 1.5; rendering pauses when hidden, outside the hero viewport, or manually paused. The existing `enableAurora` configuration flag controls this fluid effect. `css/studio.css` contains the redesign and both theme palettes; `js/showcase.js` renders its application previews.
 - Fonts come from Google Fonts. Motion uses three.js 0.169.0, GSAP/ScrollTrigger 3.12.5, and Lenis 1.1.18 via jsDelivr. [Three.js documents CDN module imports here](https://threejs.org/manual/pages/installation.html).
 
 ## Verification

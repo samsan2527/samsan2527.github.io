@@ -1,8 +1,9 @@
 import { config } from './config.js';
-import { content, pillars, solutions, caseStudies } from './data.js';
+import { content, solutions, caseStudies } from './data.js';
 import { initPalette } from './palette.js';
-import { initContact, copyEmail, toast } from './contact.js';
+import { initContact, copyEmail } from './contact.js';
 import { notifyVisit } from './notify.js';
+import { renderShowcase, initShowcase } from './showcase.js';
 
 export const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const e = escapeHTML;
@@ -25,7 +26,7 @@ const heading = (item, extra='') => `<div class="section-label">${e(item.label)}
 const endCTA = () => `<div class="end-cta wrap"><h2>Let’s make it <em>work for you.</em></h2><a href="./index.html#contact" class="button magnetic">Start a conversation ${icon()}</a></div>`;
 
 function renderShell() {
-  document.querySelector('#site-header').innerHTML = `<div class="header-inner wrap"><a class="wordmark" href="./index.html" aria-label="${e(config.displayName)} — home"><span class="wordmark-mark" aria-hidden="true">s.</span><span>${e(config.displayName.toLowerCase())}<small>.engineer</small></span></a><nav class="nav-links" id="navigation" aria-label="Main navigation">${content.navigation.map(n => `<a href="${href(n.id)}" data-section="${n.id}">${e(n.label)}</a>`).join('')}</nav><div class="header-actions"><button class="palette-trigger" aria-label="Open command palette" aria-keyshortcuts="Meta+K Control+K"><span>Press</span><kbd>⌘ K</kbd></button><a class="header-contact" href="${href('contact')}">Let’s talk ${icon()}</a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">${icon('menu')}</button></div></div>`;
+  document.querySelector('#site-header').innerHTML = `<div class="header-inner wrap"><a class="wordmark" href="./index.html" aria-label="${e(config.displayName)} — home"><span class="wordmark-mark" aria-hidden="true">s.</span><span>${e(config.displayName.toLowerCase())}<small>.engineer</small></span></a><div class="header-cluster"><nav class="nav-links" id="navigation" aria-label="Main navigation">${content.navigation.map(n => `<a href="${href(n.id)}" data-section="${n.id}">${e(n.label)}</a>`).join('')}</nav><div class="header-actions"><button class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false"><svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg></button><button class="palette-trigger" aria-label="Open command palette" aria-keyshortcuts="Meta+K Control+K"><span>Press</span><kbd>⌘ K</kbd></button><a class="header-contact" href="${href('contact')}">Let’s talk ${icon()}</a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">${icon('menu')}</button></div></div></div>`;
   document.querySelector('#site-footer').innerHTML = `<div class="footer-inner wrap"><a class="wordmark" href="./index.html"><span class="wordmark-mark" aria-hidden="true">s.</span>${e(config.displayName.toLowerCase())}</a><p>© ${new Date().getFullYear()} ${e(config.displayName)} · Thoughtfully engineered.</p><div class="footer-end"><p>${e(config.location)} · ${e(config.region)}</p><a href="#main">Back to top ↑</a></div></div>`;
   document.body.insertAdjacentHTML('beforeend', '<div class="page-transition" aria-hidden="true"></div><div class="toast" role="status" aria-live="polite"></div>');
   document.querySelector('.menu-toggle').addEventListener('click', event => {
@@ -39,10 +40,6 @@ function renderShell() {
   }));
 }
 
-function schematic() {
-  return `<aside class="hero-schematic" aria-label="Conceptual connected system"><div class="hero-schematic-head"><span><span class="status-dot"></span> SYSTEMS, CONNECTED</span><span>01—03</span></div><svg viewBox="0 0 250 60" fill="none" aria-hidden="true"><path d="M30 30H220" stroke="#2de2b045"/><path class="packet" d="M30 30H220" stroke="#2de2b0"/><circle cx="30" cy="30" r="18" fill="#11251d" stroke="#2b5141"/><path d="m30 20 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" stroke="#2de2b0"/><rect x="107" y="12" width="36" height="36" rx="3" fill="#11251d" stroke="#2b5141"/><path d="m117 25 5 5-5 5m10 0h7" stroke="#2de2b0"/><circle cx="220" cy="30" r="18" fill="#11251d" stroke="#2b5141"/><rect x="212" y="23" width="16" height="14" rx="1" stroke="#2de2b0"/><path d="M212 28h16" stroke="#2de2b0"/></svg><div class="hero-schematic-caption"><span>INTELLIGENCE</span><span>WORKFLOWS</span><span>SOFTWARE</span></div></aside>`;
-}
-
 function workCard(item, index) {
   return `<article class="work-card"><a href="./case.html?id=${encodeURIComponent(item.id)}" aria-label="Read ${e(item.title)} project outline"><div class="work-cover glow-card"><img src="${e(item.cover)}" alt="${e(item.title)} conceptual system illustration" loading="lazy" width="640" height="460"><span class="work-number mono">PROJECT / ${String(index + 1).padStart(2,'0')}</span><span class="cover-arrow">${icon()}</span><div class="work-hover">${tags(item.stack)}<div class="mini-architecture">${item.architecture.map(e).join(' → ')}</div></div></div><div class="work-meta mono"><span>${e(item.pillar)} / ${e(item.industry)}</span><span>Project outline</span></div><h3>${e(item.title)}</h3><p>${e(item.summary)}</p></a></article>`;
 }
@@ -53,42 +50,8 @@ function contactSection() {
 }
 
 function renderHome() {
-  const h = content.hero;
-  document.body.insertAdjacentHTML('afterbegin', '<div id="aurora" class="aurora" aria-hidden="true"><div class="aurora-ribbon"></div><div class="aurora-ribbon"></div><div class="aurora-ribbon"></div><div class="perspective-grid"></div></div>');
-  document.querySelector('#main').innerHTML = `<section class="hero wrap" id="hero"><div class="hero-topline mono"><span class="status-dot"></span>${e(h.eyebrow)}</div><h1>${h.lines.map((line,i) => `<span class="line-mask"><span>${e(line)}${i===2 ? ` <em>${e(h.emphasis)}</em>` : ''}</span></span>`).join('')}</h1><p class="hero-description">${e(h.description)}</p><div class="hero-cta"><a class="button magnetic" href="#work">${e(h.primary)} ${icon()}</a><a class="button button-text" href="#contact">${e(h.secondary)} ${icon()}</a></div><span class="hero-side">25.2048° N &nbsp; 55.2708° E &nbsp; / &nbsp; ${e(config.region)}</span>${schematic()}<div class="hero-bottom"><div class="hero-rotation"><span class="bracket">[</span><span class="rotation-text">${e(h.rotating[0])}</span><span class="bracket">]</span></div><a class="hero-scroll" href="#expertise">Scroll to explore ${icon('down')}</a></div></section><div class="industries wrap"><span class="industries-label mono">Across industries</span><div class="industry-list">${content.industries.map(i=>`<span>${e(i)}</span>`).join('')}</div></div><section class="section wrap" id="expertise">${heading(content.expertise)}<div class="pillars">${pillars.map((p,i)=>`<article class="pillar glow-card ${i===0 ? 'active':''}" data-pillar="${p.id}"><div class="pillar-top"><span class="mono muted">${p.number} / ${p.id.toUpperCase()}</span>${icon(p.id,'pillar-icon')}</div><h3><button class="pillar-toggle" aria-expanded="${i===0}" aria-controls="pillar-services-${p.id}">${e(p.title)} ${icon('plus')}</button></h3><p class="pillar-short">${e(p.short)}</p><p class="pillar-description">${e(p.description)}</p><div class="pillar-services" id="pillar-services-${p.id}">${p.services.map(s=>`<a href="#contact" title="${e(s.detail)}" data-interest="${p.id==='ai'?'AI':p.title}">${e(s.name)} <span aria-hidden="true">↗</span></a>`).join('')}</div></article>`).join('')}</div><div class="section-foot"><p>Independent thinking. End-to-end execution.</p><a class="text-link" href="#contact">Find the right approach ${icon()}</a></div></section><section class="section wrap" id="solutions">${heading(content.solutions)}<div class="explorer"><div class="solution-tabs" role="tablist" aria-label="Explore software solutions">${['emr','crm','hrms','erp','finance'].map((id,i)=>{const s=solutions.find(x=>x.id===id);return `<button class="solution-tab" id="tab-${id}" role="tab" aria-selected="${i===0}" aria-controls="solution-panel" tabindex="${i===0?0:-1}" data-solution="${id}">${e(s.title)}</button>`}).join('')}</div><div class="explorer-body" id="solution-panel" role="tabpanel" aria-labelledby="tab-emr" tabindex="0"></div></div><div class="section-foot"><p>15 focused solutions. Designed to work together.</p><a class="text-link" href="./solutions.html">Explore all solutions ${icon()}</a></div></section><section class="section wrap home-work" id="work">${heading(content.work)}<div class="work-grid">${caseStudies.slice(0,3).map(workCard).join('')}</div><div class="section-foot"><p>${e(content.work.note)}</p><a class="text-link" href="./work.html">View all projects ${icon()}</a></div></section>${processSection()}<section class="section wrap" id="about"><div class="about-layout"><div><div class="section-label">${e(content.about.label)}</div><div class="about-mark" aria-hidden="true">s.</div><div class="about-location">${e(config.location)}<br>${e(config.region)}</div></div><div class="about-details"><h2 class="reveal">${e(content.about.title)}<em>${e(content.about.emphasis)}</em></h2>${content.about.paragraphs.map(p=>`<p>${e(p)}</p>`).join('')}<ul class="principles">${content.about.principles.map(p=>`<li>${e(p)}</li>`).join('')}</ul></div></div></section><div class="stack-strip" aria-label="Technology stack" tabindex="0"><div class="stack-track">${[false,true].map(hidden=>`<div class="stack-group" ${hidden?'aria-hidden="true"':''}>${content.stack.map(s=>`<span>${e(s)}</span>`).join('')}</div>`).join('')}</div></div>${contactSection()}`;
-  renderExplorer('emr');
-  initHomeInteractions();
-}
-
-function processSection() {
-  const p = content.process;
-  return `<section class="section wrap" id="process"><div class="process-layout"><div class="process-intro"><div class="section-label">${e(p.label)}</div><h2 class="reveal">${e(p.title)}<em>${e(p.emphasis)}</em></h2><p>${e(p.description)}</p></div><div class="process-steps">${p.steps.map((s,i)=>`<article class="process-step"><span class="mono">0${i+1} /</span><h3>${e(s.title)}</h3><p>${e(s.text)}</p></article>`).join('')}</div></div><div class="system-flow"><div class="flow-label mono">A connected architecture / from intent to action</div><div class="flow-nodes"><svg class="flow-paths" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path id="flow-line" d="M0 5H1000"/>${[0,2,4].map(n=>`<circle class="flow-packet" r="2"><animateMotion dur="6s" begin="-${n}s" repeatCount="indefinite" path="M0 5H1000"/></circle>`).join('')}</svg>${p.nodes.map((n,i)=>`<div class="flow-node">${icon(['input','ai','automation','systems'][i])}<span>${e(n)}</span></div>`).join('')}</div></div></section>`;
-}
-
-function renderExplorer(id) {
-  const s = solutions.find(s=>s.id===id);
-  const panel = document.querySelector('#solution-panel');
-  const oldRects = new Map([...panel.querySelectorAll('[data-module]')].map(el=>[el.dataset.module,el.getBoundingClientRect()]));
-  panel.setAttribute('aria-labelledby',`tab-${id}`);
-  panel.innerHTML = `<div class="explorer-summary"><span class="mono">${e(s.category)} / ${String(s.modules.length).padStart(2,'0')} modules</span><h3>${e(s.title)}</h3><p>${e(s.summary)}</p>${tags(s.stack)}<a class="text-link" href="./solution.html?id=${id}">Explore solution ${icon()}</a></div><div class="diagram-wrap">${id==='emr' ? emrMap(s) : `<div class="module-grid">${s.modules.map((m,i)=>`<div class="module-tile" data-module="${e(m)}"><span>${String(i+1).padStart(2,'0')}</span>${e(m)}</div>`).join('')}</div>`}</div>`;
-  if(!reduced.matches && !document.documentElement.classList.contains('motion-paused')) panel.querySelectorAll('[data-module]').forEach((el,i)=>{
-    const before=oldRects.get(el.dataset.module), after=el.getBoundingClientRect();
-    const base=getComputedStyle(el).transform;const transform=base==='none'?'':base;
-    const start=before?{transform:`translate(${before.left-after.left}px,${before.top-after.top}px) ${transform}`,opacity:.5}:{opacity:0,transform:`translateY(10px) ${transform}`};
-    el.animate([start,{opacity:1,transform:transform||'none'}],{duration:340,delay:i*20,easing:'cubic-bezier(.2,.7,.2,1)'});
-  });
-  panel.querySelectorAll('.map-node[data-module]').forEach(node=>{
-    const show=()=>{panel.querySelectorAll('.connector').forEach(p=>p.classList.toggle('highlight',p.dataset.link===node.dataset.index));const tooltip=panel.querySelector('.map-tooltip');tooltip.textContent=node.dataset.module;tooltip.hidden=false;};
-    const hide=()=>{panel.querySelectorAll('.connector').forEach(p=>p.classList.remove('highlight'));panel.querySelector('.map-tooltip').hidden=true;};
-    node.addEventListener('mouseenter',show);node.addEventListener('focus',show);node.addEventListener('mouseleave',hide);node.addEventListener('blur',hide);
-    node.addEventListener('click',()=>location.assign(`./solution.html?id=emr#module-${node.dataset.index}`));
-  });
-}
-
-function emrMap(s) {
-  // Full module map: three rings laid out as two columns and two arcs.
-  const positions = [[19,10],[43,9],[70,10],[86,21],[87,35],[87,49],[87,63],[86,77],[71,90],[45,91],[19,89],[13,76],[13,62],[13,48],[13,34],[13,22],[40,29],[63,29],[37,70],[63,70],[50,80]];
-  return `<div class="node-map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${positions.map(([x,y],i)=>`<path class="connector" data-link="${i}" d="M50 50 Q${x} 50 ${x} ${y}" vector-effect="non-scaling-stroke"/>`).join('')}</svg><div class="map-node core" style="left:50%;top:50%">EMR Core<small>CONNECTED CARE</small></div>${s.modules.map((m,i)=>`<button class="map-node" data-index="${i}" data-module="${e(m)}" style="left:${positions[i][0]}%;top:${positions[i][1]}%" aria-label="Explore ${e(m)}">${e(m.replace(' & Scheduling','').replace(' & SOAP Notes','').replace('Insurance Claims & Pre-Auth','Claims & Pre-Auth').replace(' & App',''))}</button>`).join('')}<div class="map-tooltip" role="status" hidden></div></div><span class="map-caption mono">Hover to trace connections · select a module to explore</span>`;
+  document.querySelector('#main').innerHTML = renderShowcase({ e, icon, contactSection });
+  initShowcase();
 }
 
 function renderCatalog() {
@@ -133,29 +96,7 @@ function setMeta(title,description) {
   ['og:description','twitter:description'].forEach(p=>document.querySelector(`meta[${p.startsWith('og')?'property':'name'}="${p}"]`)?.setAttribute('content',description));
 }
 
-function initHomeInteractions() {
-  const activate=panel=>document.querySelectorAll('.pillar').forEach(p=>{p.classList.toggle('active',p===panel);p.querySelector('button').setAttribute('aria-expanded',String(p===panel));});
-  document.querySelectorAll('.pillar').forEach(p=>{p.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)activate(p);});p.querySelector('button').addEventListener('click',()=>activate(p));p.addEventListener('focusin',()=>activate(p));});
-  const tabs=[...document.querySelectorAll('.solution-tab')];
-  const select=tab=>{tabs.forEach(t=>{t.setAttribute('aria-selected',String(t===tab));t.tabIndex=t===tab?0:-1;});renderExplorer(tab.dataset.solution);};
-  tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>select(tab));tab.addEventListener('keydown',event=>{let next=i;if(event.key==='ArrowRight')next=(i+1)%tabs.length;else if(event.key==='ArrowLeft')next=(i-1+tabs.length)%tabs.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=tabs.length-1;else return;event.preventDefault();select(tabs[next]);tabs[next].focus();});});
-  document.querySelectorAll('[data-interest]').forEach(a=>a.addEventListener('click',()=>{document.querySelector('#service').value=a.dataset.interest;}));
-  const interest=new URLSearchParams(location.search).get('interest');
-  if(content.contact.interests.includes(interest))document.querySelector('#service').value=interest;
-  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)document.querySelectorAll('[data-section]').forEach(a=>a.classList.toggle('active',a.dataset.section===entry.target.id));}),{rootMargin:'-20% 0px -55% 0px'});
-  document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
-  if(!reduced.matches)initScramble();
-}
-
 let motionPaused=false;
-function initScramble() {
-  const target=document.querySelector('.rotation-text');let index=0;
-  setInterval(()=>{
-    if(document.hidden||motionPaused||reduced.matches||scrollY>innerHeight)return;
-    index=(index+1)%content.hero.rotating.length;const word=content.hero.rotating[index];const start=performance.now();
-    const frame=now=>{if(reduced.matches||motionPaused){target.textContent=word;return;}const progress=Math.min((now-start)/650,1);target.textContent=[...word].map((c,i)=>c===' '?' ':i/word.length<progress?c:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random()*36)]).join('');if(progress<1)requestAnimationFrame(frame);};requestAnimationFrame(frame);
-  },3600);
-}
 
 function initGlow() {
   document.querySelectorAll('.glow-card').forEach(card=>{if(card.dataset.glowReady)return;card.dataset.glowReady='true';card.addEventListener('pointermove',event=>{const r=card.getBoundingClientRect();card.style.setProperty('--x',`${event.clientX-r.left}px`);card.style.setProperty('--y',`${event.clientY-r.top}px`);});});
@@ -163,7 +104,7 @@ function initGlow() {
 
 function initPageBehavior() {
   let last=scrollY;const header=document.querySelector('#site-header');
-  const scroll=()=>{const y=scrollY;header.classList.toggle('solid',y>30||!home);header.classList.toggle('away',y>last&&y>200&&!header.contains(document.activeElement)&&!document.querySelector('.nav-links.open'));last=y;if(home){const hero=document.querySelector('.hero');document.querySelector('#aurora').style.opacity=Math.max(0,1-y/hero.offsetHeight);}};
+  const scroll=()=>{const y=scrollY;header.classList.toggle('solid',y>30||!home);header.classList.toggle('away',y>last&&y>200&&!header.contains(document.activeElement)&&!document.querySelector('.nav-links.open'));last=y;};
   window.addEventListener('scroll',scroll,{passive:true});scroll();
   header.addEventListener('focusin',()=>header.classList.remove('away'));
   document.querySelectorAll('.copy-email').forEach(b=>b.addEventListener('click',copyEmail));
@@ -205,7 +146,7 @@ renderShell();
 if(home)setMeta(`${config.displayName} — AI, Automation & Software Engineer`,config.seoDescription);
 if(config.siteUrl){const canonical=document.querySelector('link[rel=canonical]')||document.createElement('link');canonical.rel='canonical';canonical.href=`${config.siteUrl}/${home?'':location.pathname.split('/').pop()}${location.search}`;document.head.append(canonical);document.querySelectorAll('meta[property="og:image"],meta[name="twitter:image"]').forEach(m=>m.content=`${config.siteUrl}/assets/og-image.png`);document.querySelector('meta[property="og:url"]')?.setAttribute('content',canonical.href);}
 structuredData();initPageBehavior();initPalette({icon,escapeHTML});initContact();notifyVisit();
-if(home&&config.enableAurora&&!reduced.matches)import('./aurora.js').then(({initAurora})=>initAurora()).catch(()=>{});
+if(home&&config.enableAurora&&!reduced.matches)import('./fluid.js').then(({initFluid})=>initFluid()).catch(()=>{});
 if('requestIdleCallback' in window)requestIdleCallback(initMotionLibraries,{timeout:1800});else setTimeout(initMotionLibraries,600);
 // JS-rendered anchors must be resolved after the content exists.
 if(location.hash)requestAnimationFrame(()=>{try{document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();}catch{/* Ignore malformed URL escapes. */}});

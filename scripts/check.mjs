@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { readFile, access } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { config } from '../js/config.js';
-import { solutions, caseStudies, pillars } from '../js/data.js';
+import { solutions, caseStudies, pillars, aiApplications, softwareStories } from '../js/data.js';
 const root=new URL('../',import.meta.url);
 let checks=0;
 function ok(condition,message){assert.ok(condition,message);checks++;}
@@ -16,7 +16,7 @@ for(const page of pages){
   for(const [,path] of source.matchAll(/(?:src|href)="(\.\/[^"?#]+)(?:[?#][^"]*)?"/g)){await access(new URL(path,root));checks++;}
   ok(!/(?:href|src)="\/(?!\/)/.test(source),`${page}: relative assets`);
 }
-for(const file of ['config','data','main','aurora','palette','contact','notify']){
+for(const file of ['config','data','main','aurora','fluid','showcase','theme','palette','contact','notify']){
   const result=spawnSync(process.execPath,['--check',fileURLToPath(new URL(`js/${file}.js`,root))],{encoding:'utf8'});
   assert.equal(result.status,0,result.stderr);checks++;
 }
@@ -24,6 +24,9 @@ for(const collection of [solutions,caseStudies,pillars])ok(new Set(collection.ma
 assert.equal(solutions.length,15);assert.equal(caseStudies.length,10);assert.equal(solutions[0].modules.length,21);checks+=3;
 for(const item of solutions){for(const key of ['modules','features','integrations','stack'])ok(item[key]?.length,`${item.id}.${key}`);}
 for(const item of caseStudies){await access(new URL(item.cover,root));ok(item.architecture.length>1&&item.metrics.length>0,`${item.id}: architecture and metrics`);}
+ok(aiApplications.length===6&&new Set(aiApplications.map(item=>item.id)).size===6,'Six distinct AI applications');
+for(const item of aiApplications)if(item.caseId)ok(caseStudies.some(project=>project.id===item.caseId),`${item.id}: valid project link`);
+for(const item of solutions)ok(softwareStories[item.id]?.headline&&softwareStories[item.id]?.visual,`${item.id}: storyboard content`);
 const mainSource=await readFile(new URL('js/main.js',root),'utf8');
 ok(!/(?:tel:|wa\.me\/|api\.whatsapp\.com\/send)/.test(mainSource),'No phone / WhatsApp contact links');
 
