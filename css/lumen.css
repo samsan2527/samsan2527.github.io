@@ -307,3 +307,24 @@ h1 em,h2 em,h3 em{font-family:inherit;font-style:normal;color:var(--lm-dim)}
 @media(prefers-reduced-motion:reduce){.lm-hl7-line{animation:none}}
 .lm-nav a{white-space:nowrap}
 @media(max-width:1440px) and (min-width:1181px){.lm-nav a,.lm-cta{padding-inline:11px;letter-spacing:.08em}.lm-header-inner{padding-inline:clamp(22px,4vw,160px)}}
+
+/* About: stats, grouped skills, journey, builds */
+.lm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.lm-stats li{display:flex;flex-direction:column;gap:14px;padding:clamp(24px,2.4vw,38px);background:var(--bg)}
+.lm-stats strong{font-size:clamp(48px,4.6vw,80px);font-weight:500;line-height:1;letter-spacing:-.05em}
+.lm-stats li>span{font-size:14px;line-height:1.5;color:var(--muted);max-width:220px}
+.lm-skills-head{margin:clamp(56px,5vw,84px) 0 22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.lm-skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lm-skills li{padding:clamp(22px,2vw,30px);background:var(--surface);border-radius:12px}
+.lm-skills h3{font-size:18px;font-weight:500;letter-spacing:-.02em;margin-bottom:18px}
+.lm-chips{display:flex;flex-wrap:wrap;gap:8px}
+.lm-chips span{font-size:13px;line-height:1;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--text);background:var(--bg)}
+.lm-journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;counter-reset:none}
+.lm-journey li{position:relative;padding-top:30px;border-top:1px solid var(--text)}
+.lm-journey li::before{content:'';position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b18cff,#6d4cff 70%);box-shadow:0 0 0 4px rgba(140,100,255,.2)}
+.lm-journey-year{font-size:13px;font-weight:500;letter-spacing:.12em;color:var(--muted)}
+.lm-journey h3{margin-top:12px;font-size:20px;font-weight:500;letter-spacing:-.025em}
+.lm-journey p{margin-top:10px;font-size:14px;line-height:1.6}
+.lm-builds span{font-size:14px;padding:10px 14px}
+@media(max-width:1100px){.lm-stats{grid-template-columns:repeat(2,1fr)}.lm-skills{grid-template-columns:repeat(2,1fr)}.lm-journey{grid-template-columns:repeat(2,1fr);row-gap:44px}}
+@media(max-width:600px){.lm-skills,.lm-journey{grid-template-columns:1fr}.lm-stats strong{font-size:44px}}

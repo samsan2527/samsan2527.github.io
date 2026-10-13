@@ -1,5 +1,5 @@
 import { config } from './config.js';
-import { content, solutions, aiApplications, simpleDescriptions, mobileApps, personalAgent, automation, healthcare } from './data.js';
+import { content, solutions, aiApplications, simpleDescriptions, mobileApps, personalAgent, automation, healthcare, profile } from './data.js';
 
 const software=solutions.filter(s=>s.id!=='mobile');
 const pad=n=>String(n).padStart(2,'0');
@@ -14,8 +14,7 @@ export function renderShowcase({e,icon,contactSection}) {
     {n:'03',icon:'systems',title:'Mobile Apps',text:'iPhone and Android apps with AI features, connected to the tools you use.',href:'#mobile'},
   ];
   return `
-    <section class="hero studio-hero lm-hero" id="about">
-      <span id="hero" class="anchor-alias"></span>
+    <section class="hero studio-hero lm-hero" id="hero">
       <div class="fluid-field" id="aurora" aria-hidden="true"><div class="fluid-blob blob-one"></div><div class="fluid-blob blob-two"></div><div class="fluid-blob blob-three"></div><div class="fluid-blob blob-four"></div></div>
       <div class="lm-hero-content">
         <p class="lm-hero-kicker">Hi, I’m ${e(config.displayName)} — software & AI engineer</p>
@@ -33,6 +32,17 @@ export function renderShowcase({e,icon,contactSection}) {
         </div>
       </div>
       <canvas class="lm-ribbons" aria-hidden="true"></canvas>
+    </section>
+
+    <section class="lm-section lm-wrap lm-about" id="about" aria-labelledby="about-title">
+      <div class="lm-head"><div class="lm-label-stack"><span class="lm-pill">About</span><span class="lm-mono">${e(config.name)}</span></div><div><h2 id="about-title" class="lm-display">${e(profile.title)} <span class="lm-dim">${e(profile.emphasis)}</span></h2><p>${e(profile.description)}</p></div></div>
+      <ul class="lm-stats">${profile.stats.map(st=>`<li><strong><span data-count="${st.value}">${st.value}</span>${e(st.suffix)}</strong><span>${e(st.label)}</span></li>`).join('')}</ul>
+      <div class="lm-skills-head"><span class="lm-mono">Skills</span></div>
+      <ul class="lm-skills">${profile.skills.map(g=>`<li><h3>${e(g.title)}</h3><div class="lm-chips">${g.items.map(t=>`<span>${e(t)}</span>`).join('')}</div></li>`).join('')}</ul>
+      <div class="lm-skills-head"><span class="lm-mono">Journey</span></div>
+      <ol class="lm-journey">${profile.journey.map(j=>`<li><span class="lm-journey-year">${e(j.year)}</span><h3>${e(j.title)}</h3><p>${e(j.text)}</p></li>`).join('')}</ol>
+      <div class="lm-skills-head"><span class="lm-mono">Selected builds</span></div>
+      <div class="lm-chips lm-builds">${profile.builds.map(t=>`<span>${e(t)}</span>`).join('')}</div>
     </section>
 
     <section class="lm-offer" id="offer" aria-labelledby="offer-title">

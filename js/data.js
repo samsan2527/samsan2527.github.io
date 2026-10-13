@@ -20,6 +20,28 @@ export const showcase = {
   about: { title: 'One engineer.', emphasis: 'The whole picture.', text: 'I’m Santhosh William, an AI and software development engineer in Dubai. I bring the conversation, the architecture, and the build together — so your idea doesn’t get lost between teams.', principles: [{title:'Understand the real work.',text:'Start with your people, your systems, and the steps that get in their way.'},{title:'Make the parts connect.',text:'Thoughtful interfaces. Clear permissions. Integrations that hold together.'},{title:'Build for what comes next.',text:'Useful today. Understandable tomorrow. Ready to evolve with your business.'}] },
 };
 
+// About: experience and skills from the résumé (no employer details).
+export const profile = {
+  title: '7+ years building applications.', emphasis: 'The last 3+ in AI.',
+  description: 'I’m an AI engineer focused on agentic automation and LLM systems, with a background in full-stack and .NET development. I’ve built and shipped production AI across healthcare, fintech and enterprise automation — from agentic workflows and document intelligence to wearable integrations.',
+  stats: [{ value: 7, suffix: '+', label: 'Years in application & AI development' }, { value: 8, suffix: '+', label: 'Production AI systems shipped' }, { value: 100, suffix: '+', label: 'Enterprise clients served' }, { value: 5, suffix: '', label: 'Languages — English, German, Tamil, Malayalam, Hindi' }],
+  skills: [
+    { title: 'Agentic AI & LLMs', items: ['Agentic AI', 'MCP', 'LLM', 'VLM', 'RAG', 'Multi-agent orchestration', 'Prompt engineering', 'LangChain', 'Llama'] },
+    { title: 'Machine learning', items: ['Deep learning', 'NLP', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Hugging Face', 'ChromaDB', 'NumPy'] },
+    { title: 'Vision & documents', items: ['Computer vision', 'Facial recognition', 'OCR', 'Document intelligence', 'OpenCV', 'YOLO', 'Frigate NVR', 'Edge TPU inference'] },
+    { title: 'Voice & language', items: ['Speech-to-text', 'Text-to-speech', 'Voice transcription', 'Multilingual translation', 'Conversational chatbots'] },
+    { title: 'Backend & apps', items: ['Python', 'FastAPI', 'C#', '.NET Core', 'ASP.NET MVC', 'C++', 'Microservices', 'REST / Web API', 'Docker', 'MSSQL', 'JavaScript'] },
+    { title: 'Healthcare & integrations', items: ['HL7', 'NABIDH', 'Malaffi', 'Riayati', 'Shafafiya', 'E-claims', 'RCM & eligibility', 'WHOOP & Oura APIs'] },
+  ],
+  journey: [
+    { year: '2018', title: '.NET development', text: 'Hospital systems in C#, including a queue-based token management system for patient flow.' },
+    { year: '2021', title: 'Full-stack & interoperability', text: 'NABIDH, Malaffi and Riayati integrations, insurance eligibility and RCM engines, and lab-equipment data pipelines.' },
+    { year: '2023', title: 'AI development', text: 'Face recognition, OCR for ID and KYC kiosks, multilingual speech-to-text and translation, and NLP banking chatbots.' },
+    { year: '2025', title: 'Agentic automation & LLM systems', text: 'MCP-connected agents, paperless document pipelines, LLM/VLM document understanding and smart-camera analytics.' },
+  ],
+  builds: ['WhatsApp AI agent', 'Smart lab report extraction', 'WHOOP & Oura integration', 'Smart camera surveillance', 'Smart BMI report from machine', 'In-house call center agent', 'LLM ↔ app connections via MCP', 'Mobile app API AI agent', 'Face recognition authentication', 'OCR KYC kiosk', 'Banking & FAQ chatbots', 'Hospital token management'],
+};
+
 // The Personal Agent tab: one agent across the tools a team already uses.
 export const personalAgent = {
   title: 'Every inbox, meeting and chat.', emphasis: 'One agent.',
