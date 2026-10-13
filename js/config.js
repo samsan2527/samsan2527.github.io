@@ -12,7 +12,7 @@ export const config = {
   notifyOnVisit: false,
   availability: 'Open for select projects',
   enableAurora: true,
-  enableSmoothScroll: true,
+  enableSmoothScroll: false,
   responseMessage: "Thanks — I'll reply within 24 hours",
   seoDescription: 'AI automation Dubai, EMR software UAE, and custom software development Dubai. Santhosh connects intelligent agents, workflows, and business software across the UAE & KSA.',
 };

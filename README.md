@@ -19,16 +19,16 @@ Edit **`js/config.js`** for the owner’s full name, display name, title, locati
 Edit **`js/data.js`** for all primary copy, services, industries, technologies, products, and project outlines:
 
 - `content`: home-page copy, navigation labels, process steps, contact choices, industry and technology strips.
-- `showcase`: hero, two collection introductions, and about-section copy.
-- `aiApplications`: six interactive AI previews, from Novo Agent to custom chatbots, with their project links.
-- `softwareStories`: headlines, visual styles and categories for the 15-product storyboard. Add matching entries here when adding products.
+- `aiApplications`: the six AI apps shown on the homepage.
+- `simpleDescriptions`: short, plain-language descriptions for every software and AI app.
+- `mobileApps`: AI Camera App, Claude MCP, ChatGPT MCP, and API Connectivity descriptions.
 - `pillars`: service names and descriptions.
 - `solutions`: `id`, `title`, `category`, `summary`, `modules[]`, `features[]`, `integrations[]`, `stack[]`. Adding an entry automatically creates a catalog card, detail page and command-palette entry.
 - `caseStudies`: `id`, `title`, `pillar`, `industry`, anonymized `client`, `summary`, `problem`, `solution`, `architecture[]`, `stack[]`, `metrics[]`, `cover`, and `status`. Images belong in `assets/` and paths start with `./assets/`.
 
 The supplied cases are **project outlines**, not claims of delivered results. Their architecture and suggested technology are illustrative. Replace the descriptions with verified implementation details before presenting them as completed case studies. Replace bracketed metrics only when verified. A numeric `metrics[].value` animates when visible; placeholder strings are never converted to made-up numbers. Update each metric’s `label` and project `status` too. Integration names identify potential scope, not regulatory approval or certification.
 
-`solution.html?id=emr` and `case.html?id=smartlab` render directly from the data. Unknown IDs show a helpful not-found state. The homepage has two main collections: AI-based applications and software applications. All 15 software products appear in a selectable storyboard with illustrated interface concepts; the catalog provides the complete product details. Preview interfaces use sample data and do not represent connected applications.
+`solution.html?id=emr` and `case.html?id=smartlab` render directly from the data. Unknown IDs show a helpful not-found state. The homepage has four menu links: About, Software Apps, AI Apps, and Mobile Apps. Fourteen software offerings appear in a visible list linking to their details. All six AI apps appear as simple cards. Mobile development has its own section with AI Camera App, Claude MCP, ChatGPT MCP, and API Connectivity. The complete catalog retains all 15 offerings. The design follows the Lumen-style reference: Inter on neutral black/white surfaces, floating pill navigation, a colorful fluid hero with line-by-line headline reveal, a scroll-lit statement over animated ribbons (`js/ribbons.js`), a gradient-arc offer section, a featured-card software grid, block-wipe headings, and a floating search/theme/contact dock. Those styles live in `css/lumen.css`, loaded last on every page.
 
 ### Search and social metadata
 
@@ -82,12 +82,12 @@ The root `404.html` works for missing sibling URLs. On deeply nested nonexistent
 ## Interactions and accessibility
 
 - Command palette: **⌘K / Ctrl+K**, fuzzy search, arrows to navigate, Enter to open, Escape to close. Native dialog focus trapping and focus restoration.
-- AI application tabs: pointer, arrow keys and Home/End. Desktop uses a vertical selector; narrow screens use a horizontal selector. Search can deep-link to a specific application.
-- Software storyboard: all 15 products, previous/next controls, arrow keys, Home/End and horizontal touch swipes. Selection updates the preview, detail link and accessible position announcement. It never auto-advances.
+- Application lists are visible without tabs, carousel controls, or hidden content. Software rows open details; AI cards open the enquiry form with AI selected.
+- Navigation stays visible while scrolling; the mobile menu provides the same four destinations.
 - Dark/light mode: the header toggle persists the choice across pages and reloads using localStorage. Dark is the default. Switching still works for the current page if storage is blocked.
-- Header tracks scroll direction, section state and keyboard focus. Native cursor throughout.
+- Header highlights the current section. Native cursor and native scrolling throughout.
 - “Pause motion” stops decorative CSS, SVG and WebGL animation. Reduced-motion preference disables decorative movement, transitions and smooth scrolling and uses a static CSS fluid background. Native scrolling and content remain available without the optional libraries.
-- The hero uses a flowing, domain-warped color shader with a CSS fallback. Pixel ratio is capped at 1.5; rendering pauses when hidden, outside the hero viewport, or manually paused. The existing `enableAurora` configuration flag controls this fluid effect. `css/studio.css` contains the redesign and both theme palettes; `js/showcase.js` renders its application previews.
+- The hero uses a flowing, domain-warped color shader with a CSS fallback. Pixel ratio is capped at 1.5; rendering pauses when hidden, outside the hero viewport, or manually paused. The existing `enableAurora` configuration flag controls this fluid effect. `css/studio.css` contains the redesign and both theme palettes; `js/showcase.js` renders its application lists.
 - Fonts come from Google Fonts. Motion uses three.js 0.169.0, GSAP/ScrollTrigger 3.12.5, and Lenis 1.1.18 via jsDelivr. [Three.js documents CDN module imports here](https://threejs.org/manual/pages/installation.html).
 
 ## Verification

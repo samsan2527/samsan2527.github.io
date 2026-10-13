@@ -7,7 +7,7 @@
   function apply(value) {
     root.dataset.theme=value;
     root.style.colorScheme=value;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',value==='light'?'#f5f4ef':'#0c0d0d');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',value==='light'?'#fafafa':'#0a0a0a');
     document.querySelectorAll('.theme-toggle').forEach(button=>{
       button.setAttribute('aria-label',value==='dark'?'Switch to light mode':'Switch to dark mode');
       button.setAttribute('aria-pressed',String(value==='light'));

@@ -22,7 +22,7 @@ export async function initFluid() {
         vec2 q=vec2(fbm(p+vec2(t,-t*.4)),fbm(p+vec2(5.2,1.3)+t*.3));
         vec2 r=vec2(fbm(p+3.1*q+vec2(1.7,9.2)+t*.4),fbm(p+3.4*q+vec2(8.3,2.8)-t*.25));
         float f=fbm(p+2.8*r);float band=sin(p.x*1.2+p.y*.8+f*5.+t*.3)*.5+.5;
-        vec3 sea=vec3(.18,.39,.43),sage=vec3(.68,.76,.59),sand=vec3(.9,.69,.4),clay=vec3(.71,.37,.23),sky=vec3(.48,.67,.76);
+        vec3 sea=vec3(.9,.23,.38),sage=vec3(1.,.67,.32),sand=vec3(1.,.92,.42),clay=vec3(1.,.36,.22),sky=vec3(.32,.7,.91);
         vec3 col=mix(sea,sage,smoothstep(.22,.69,f));col=mix(col,clay,smoothstep(.3,.8,r.x)*.85);col=mix(col,sand,smoothstep(.48,.83,q.y)*.85);col=mix(col,sky,smoothstep(.5,.93,band)*smoothstep(.2,.65,r.y)*.75);
         col+=.035*sin((f+r.y*.4)*22.);gl_FragColor=vec4(col,1.);
       }`

@@ -1,12 +1,12 @@
 export const content = {
-  navigation: [{ label: 'AI applications', id: 'ai' }, { label: 'Software', id: 'solutions' }, { label: 'About', id: 'about' }],
+  navigation: [{ label: 'About', id: 'about' }, { label: 'Software Apps', id: 'solutions' }, { label: 'AI Apps', id: 'ai' }, { label: 'Mobile Apps', id: 'mobile' }],
   hero: { eyebrow: 'Independent engineer · Dubai, UAE', lines: ['I build AI agents,', 'automation, and software', 'that run'], emphasis: 'real businesses.', description: 'From the first conversation to the last line of code. I connect intelligent systems to the work that matters.', primary: 'Explore my work', secondary: 'Let’s talk', caption: 'Intelligence, connected to the real world.', rotating: ['Smart chat agents', 'MCP integrations', 'EMR systems', 'Computer vision', 'Workflow automation'] },
   expertise: { label: '01 / What I do', title: 'Three disciplines.', emphasis: 'One connected system.', description: 'Intelligence is only useful when it works with your business. I build the agents, connect the workflows, and engineer the software beneath them.' },
   solutions: { label: '02 / Built for your business', title: 'Complex operations.', emphasis: 'Considered software.', description: 'Purpose-built systems, designed around the way your team actually works. Explore the building blocks.' },
   work: { label: '03 / Selected work', title: 'Less friction.', emphasis: 'More possibility.', description: 'A look inside the systems: the problem, the architecture, and the thinking behind the build.', note: 'Project outlines · client details anonymized · outcomes awaiting verification' },
   process: { label: '04 / How I work', title: 'From moving parts', emphasis: 'to working systems.', description: 'A direct line from your business problem to a thoughtfully engineered solution.', steps: [{ title: 'Understand', text: 'Map your workflow, find the bottleneck, and define what a useful outcome looks like.' }, { title: 'Architect', text: 'Design the connections, permissions, and failure paths before writing the first integration.' }, { title: 'Build & connect', text: 'Work in small, testable increments. Make each part work, then make them work together.' }, { title: 'Refine & support', text: 'Deploy with visibility, document the system, and improve it around real usage.' }], nodes: ['Input', 'AI Layer', 'Automation', 'Your Systems'] },
   about: { label: '05 / The engineer behind the systems', title: 'A builder first.', emphasis: 'A partner throughout.', paragraphs: ['I’m Santhosh, an AI, automation and software development engineer based in Dubai. I work at the intersection of intelligent software and the everyday operations that keep a business moving.', 'My focus is practical: a WhatsApp AI agent that knows when to hand over. An MCP integration that respects system boundaries. An EMR that fits the clinic, and automation that gives people their time back.'], principles: ['Business context before code', 'Clear architecture. Thoughtful details.', 'Built to be understood and maintained'] },
-  contact: { label: 'Start a conversation', title: 'Have a system that', emphasis: 'should run itself?', description: 'Tell me what’s slowing you down. We’ll work out what’s possible.', interests: ['AI', 'Automation', 'Software', 'Website', 'Other'], budgets: ['Prefer to discuss', 'Under AED 10,000', 'AED 10,000–30,000', 'AED 30,000–75,000', 'AED 75,000+'] },
+  contact: { label: 'Start a conversation', title: 'Let’s talk about', emphasis: 'your project.', description: 'Tell me what you need. I’ll get back to you by email.', interests: ['AI', 'Automation', 'Software', 'Mobile Apps', 'Website', 'Other'], budgets: ['Prefer to discuss', 'Under AED 10,000', 'AED 10,000–30,000', 'AED 30,000–75,000', 'AED 75,000+'] },
   industries: ['Healthcare', 'Insurance', 'Banking & Finance', 'HR & Recruitment', 'Fitness', 'Retail', 'Enterprise'],
   stack: ['Python', 'Node.js', 'FastAPI', '.NET', 'React', 'React Native', 'Flutter', 'PostgreSQL', 'SQL Server', 'OpenAI', 'Claude', 'MCP', 'Whisper', 'OpenCV', 'YOLO', 'Tesseract', 'Docker', 'IIS', 'Azure', 'n8n'],
 };
@@ -108,4 +108,37 @@ export const caseStudies = [
   caseStudy('kiosk', 'Self-service kiosk', 'Automation', 'Healthcare', 'Outpatient care provider', 'A simpler arrival, in more than one language.', 'Reception queues grow when identity capture and check-in need repeated manual input.', 'A guided kiosk combines speech interaction, ID OCR and staff-assisted exception handling for check-in.', ['Speech / ID', 'Whisper / OCR', 'Validation', 'Check-in'], ['Whisper', 'TTS', 'Tesseract', 'FastAPI'], '[XX min/check-in saved]'),
   caseStudy('community', 'Community WhatsApp automation', 'Automation', 'Enterprise', 'Community operations team', 'The right update, at the right moment.', 'Manual community updates require repeated coordination and make opt-out preferences harder to track.', 'An event-driven messaging workflow connects approved templates, subscriber preferences and delivery logging.', ['Event', 'Workflow', 'WhatsApp', 'Delivery log'], ['n8n', 'WhatsApp API', 'Node.js'], '[XX hrs/month saved]'),
   caseStudy('event-brand', 'Event identity & motion', 'Software', 'Creative', 'Event organizing team', 'One identity. Every touchpoint.', 'Event communications need a consistent visual identity across print, digital and on-screen motion.', 'An identity system pairs a flexible logo with reusable digital assets and AI-assisted motion explorations.', ['Brief', 'Identity', 'Motion', 'Touchpoints'], ['SVG', 'Motion design', 'AI video'], '[XX assets delivered]'),
+];
+
+// Plain-language homepage descriptions. Product details remain in the catalog.
+export const simpleDescriptions = {
+  emr: 'Manage patients, appointments, medical records, and billing.',
+  insurance: 'Keep policies, members, approvals, and claims in one place.',
+  mobile: 'Custom iPhone and Android apps for your customers or team.',
+  hrms: 'Manage employee records, leave, payroll, and onboarding.',
+  attendance: 'Track check-ins, shifts, working hours, and overtime.',
+  crm: 'Organize leads, customer details, and sales follow-ups.',
+  erp: 'Connect purchasing, inventory, sales, and branches.',
+  finance: 'Manage invoices, expenses, accounts, and financial reports.',
+  banking: 'Support account, transaction, and document workflows.',
+  gym: 'Manage memberships, classes, trainers, and payments.',
+  dms: 'Store, search, share, and approve business documents.',
+  assets: 'Track equipment, assignments, maintenance, and repairs.',
+  token: 'Manage waiting lines, tokens, and counter displays.',
+  web: 'Business websites, online stores, and web applications.',
+  brand: 'Logos, brand identities, and digital designs.',
+  novoagent: 'An AI assistant that finds information and helps complete tasks across your business tools.',
+  'custom-chatbot': 'A chatbot for your website or WhatsApp that answers questions and helps with bookings.',
+  mcp: 'Connect AI assistants to your business systems with controlled access.',
+  cv: 'Organize CVs and highlight relevant experience for your recruitment team to review.',
+  vision: 'Use camera feeds to understand visitor numbers, waiting lines, and occupancy.',
+  voice: 'Turn speech and documents into useful text and records for your team to review.',
+};
+
+// Mobile applications and the connections available around them.
+export const mobileApps = [
+  { title: 'AI Camera App', description: 'Use a phone camera to read text, recognize objects, and send information to your workflow.' },
+  { title: 'Claude MCP', description: 'Connect Claude to your app’s data and tools through approved MCP integrations.' },
+  { title: 'ChatGPT MCP', description: 'Connect ChatGPT to your business data and tools through approved MCP integrations.' },
+  { title: 'API Connectivity', description: 'Connect your mobile app to bookings, payments, customer records, and other business systems.' },
 ];
