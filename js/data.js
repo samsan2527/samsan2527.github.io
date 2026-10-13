@@ -1,12 +1,12 @@
 export const content = {
-  navigation: [{ label: 'About', id: 'about' }, { label: 'Personal Agent', id: 'agent' }, { label: 'Software Apps', id: 'solutions' }, { label: 'AI Apps', id: 'ai' }, { label: 'Mobile Apps', id: 'mobile' }],
+  navigation: [{ label: 'About', id: 'about' }, { label: 'Personal Agent', id: 'agent' }, { label: 'Automation', id: 'automation' }, { label: 'Healthcare', id: 'healthcare' }, { label: 'Software', id: 'solutions' }, { label: 'AI Apps', id: 'ai' }, { label: 'Mobile', id: 'mobile' }],
   hero: { eyebrow: 'Independent engineer · Dubai, UAE', lines: ['I build AI agents,', 'automation, and software', 'that run'], emphasis: 'real businesses.', description: 'From the first conversation to the last line of code. I connect intelligent systems to the work that matters.', primary: 'Explore my work', secondary: 'Let’s talk', caption: 'Intelligence, connected to the real world.', rotating: ['Smart chat agents', 'MCP integrations', 'EMR systems', 'Computer vision', 'Workflow automation'] },
   expertise: { label: '01 / What I do', title: 'Three disciplines.', emphasis: 'One connected system.', description: 'Intelligence is only useful when it works with your business. I build the agents, connect the workflows, and engineer the software beneath them.' },
   solutions: { label: '02 / Built for your business', title: 'Complex operations.', emphasis: 'Considered software.', description: 'Purpose-built systems, designed around the way your team actually works. Explore the building blocks.' },
   work: { label: '03 / Selected work', title: 'Less friction.', emphasis: 'More possibility.', description: 'A look inside the systems: the problem, the architecture, and the thinking behind the build.', note: 'Project outlines · client details anonymized · outcomes awaiting verification' },
   process: { label: '04 / How I work', title: 'From moving parts', emphasis: 'to working systems.', description: 'A direct line from your business problem to a thoughtfully engineered solution.', steps: [{ title: 'Understand', text: 'Map your workflow, find the bottleneck, and define what a useful outcome looks like.' }, { title: 'Architect', text: 'Design the connections, permissions, and failure paths before writing the first integration.' }, { title: 'Build & connect', text: 'Work in small, testable increments. Make each part work, then make them work together.' }, { title: 'Refine & support', text: 'Deploy with visibility, document the system, and improve it around real usage.' }], nodes: ['Input', 'AI Layer', 'Automation', 'Your Systems'] },
   about: { label: '05 / The engineer behind the systems', title: 'A builder first.', emphasis: 'A partner throughout.', paragraphs: ['I’m Santhosh William, an AI, automation and software development engineer based in Dubai. I work at the intersection of intelligent software and the everyday operations that keep a business moving.', 'My focus is practical: a WhatsApp AI agent that knows when to hand over. An MCP integration that respects system boundaries. An EMR that fits the clinic, and automation that gives people their time back.'], principles: ['Business context before code', 'Clear architecture. Thoughtful details.', 'Built to be understood and maintained'] },
-  contact: { label: 'Start a conversation', title: 'Let’s talk about', emphasis: 'your project.', description: 'Tell me what you need. I’ll get back to you by email.', interests: ['Personal Agent', 'AI', 'Automation', 'Software', 'Mobile Apps', 'Website', 'Other'], budgets: ['Prefer to discuss', 'Under AED 10,000', 'AED 10,000–30,000', 'AED 30,000–75,000', 'AED 75,000+'] },
+  contact: { label: 'Start a conversation', title: 'Let’s talk about', emphasis: 'your project.', description: 'Tell me what you need. I’ll get back to you by email.', interests: ['Personal Agent', 'AI', 'Automation', 'Healthcare Integration', 'RCM', 'Software', 'Mobile Apps', 'Website', 'Other'], budgets: ['Prefer to discuss', 'Under AED 10,000', 'AED 10,000–30,000', 'AED 30,000–75,000', 'AED 75,000+'] },
   industries: ['Healthcare', 'Insurance', 'Banking & Finance', 'HR & Recruitment', 'Fitness', 'Retail', 'Enterprise'],
   stack: ['Python', 'Node.js', 'FastAPI', '.NET', 'React', 'React Native', 'Flutter', 'PostgreSQL', 'SQL Server', 'OpenAI', 'Claude', 'MCP', 'Whisper', 'OpenCV', 'YOLO', 'Tesseract', 'Docker', 'IIS', 'Azure', 'n8n'],
 };
@@ -34,6 +34,44 @@ export const personalAgent = {
     { name: 'WhatsApp', detail: 'Customer & team conversations', icon: 'chat' },
   ],
   example: { prompt: 'What needs my attention today?', reply: 'Here’s your day across all your apps:', items: [['Email', '3 client emails are waiting for a reply'], ['Meetings', '10:00 weekly review — last week’s notes are ready'], ['ClickUp', '2 tasks are due today'], ['Slack', 'You were mentioned in #sales'], ['WhatsApp', 'A customer asked to book a demo']] },
+};
+
+// The Automation tab: manual operations handed to agents, by business area.
+export const automation = {
+  title: 'Stop waiting on manual work.', emphasis: 'Let agents do it.',
+  description: 'Data entry, follow-ups, approvals and reconciliations, handled by AI agents that work around the clock. Your team reviews the exceptions instead of doing every step by hand.',
+  manual: ['Copying data between spreadsheets and systems', 'Chasing approvals over email and calls', 'Waiting days for reports and reconciliations', 'Mistakes found only at month-end'],
+  automated: ['Agents read, enter and check the data for you', 'Approvals routed automatically, with reminders', 'Reports and reconciliations ready every morning', 'Exceptions flagged early for a person to review'],
+  areas: [
+    { title: 'Finance', items: ['Invoice capture and matching', 'Bank reconciliations', 'Expense checks and month-end reports'] },
+    { title: 'HR', items: ['CV screening and interview scheduling', 'Onboarding documents and checklists', 'Leave, attendance and payroll inputs'] },
+    { title: 'Procurement', items: ['Purchase requests and quote comparison', 'Purchase orders and supplier follow-ups', 'Goods receipt and invoice matching'] },
+    { title: 'Insurance', items: ['Claims intake and document checks', 'Pre-approval requests and status updates', 'Policy renewals and member changes'] },
+    { title: 'Approvals', items: ['Routing to the right approver', 'Reminders and escalations', 'A full audit trail of every decision'] },
+    { title: 'Banking', items: ['Account-opening document checks', 'KYC and transaction reviews', 'Statement processing and alerts'] },
+  ],
+};
+
+// The Healthcare tab: HL7 exchange connectivity, revenue cycle management and supporting apps.
+export const healthcare = {
+  title: 'Your clinic system, connected.', emphasis: 'The way regulators expect.',
+  description: 'I connect your local EMR or clinic app to the UAE health information exchanges using HL7, so patient visits, results and documents reach the government portals automatically — no double entry.',
+  exchanges: [
+    { name: 'Malaffi', region: 'Abu Dhabi', authority: 'Department of Health – Abu Dhabi' },
+    { name: 'NABIDH', region: 'Dubai', authority: 'Dubai Health Authority' },
+    { name: 'Riayati', region: 'Northern Emirates', authority: 'Emirates Health Services' },
+  ],
+  messages: ['Patient registration & visits (ADT)', 'Lab & radiology results (ORU)', 'Orders (ORM / OML)', 'Clinical documents & summaries', 'Acknowledgement (ACK) tracking', 'Validation, queueing & automatic retries'],
+  note: 'Each exchange requires facility onboarding and approval by its authority. Integrations are built to their published HL7 specifications.',
+  rcm: { title: 'RCM app', lead: 'Revenue cycle management, from first visit to final payment.', items: ['Insurance eligibility & pre-authorization', 'Medical coding (ICD-10 & CPT)', 'E-claims submission to payer portals', 'Remittance reconciliation', 'Denial management & resubmission', 'Revenue and claims dashboards'] },
+  support: [
+    { title: 'Patient app & bookings', text: 'Online appointments, reminders and visit history for patients.' },
+    { title: 'Lab integration (LIS)', text: 'Orders and results flowing between analyzers, lab and EMR.' },
+    { title: 'Pharmacy & e-prescription', text: 'Prescriptions, stock and dispensing connected to the visit.' },
+    { title: 'Telehealth', text: 'Secure video consultations with notes saved to the record.' },
+    { title: 'WhatsApp patient assistant', text: 'Bookings, reminders and FAQs answered on WhatsApp.' },
+    { title: 'Queue & token displays', text: 'Waiting-room tokens, counters and live display screens.' },
+  ],
 };
 
 export const aiApplications = [

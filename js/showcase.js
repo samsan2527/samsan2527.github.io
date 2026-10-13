@@ -1,5 +1,5 @@
 import { config } from './config.js';
-import { content, solutions, aiApplications, simpleDescriptions, mobileApps, personalAgent } from './data.js';
+import { content, solutions, aiApplications, simpleDescriptions, mobileApps, personalAgent, automation, healthcare } from './data.js';
 
 const software=solutions.filter(s=>s.id!=='mobile');
 const pad=n=>String(n).padStart(2,'0');
@@ -63,6 +63,34 @@ export function renderShowcase({e,icon,contactSection}) {
         </figure>
       </div>
       <ul class="lm-connectors" aria-label="Apps the Personal Agent connects to">${personalAgent.connectors.map(c=>`<li>${icon(c.icon,'lm-connector-icon')}<strong>${e(c.name)}</strong><span>${e(c.detail)}</span></li>`).join('')}<li class="lm-connector-hub">${icon('ai','lm-connector-icon')}<strong>One agent</strong><span>No switching between portals</span></li></ul>
+    </section>
+
+    <section class="lm-section lm-wrap" id="automation" aria-labelledby="automation-title">
+      <div class="lm-head"><div class="lm-label-stack"><span class="lm-pill">Automation</span></div><div><h2 id="automation-title" class="lm-display">${e(automation.title)} <span class="lm-dim">${e(automation.emphasis)}</span></h2><p>${e(automation.description)}</p></div></div>
+      <div class="lm-compare">
+        <div class="lm-compare-card"><span class="lm-mono">Manual today</span><ul>${automation.manual.map(t=>`<li>${icon('close')}<span>${e(t)}</span></li>`).join('')}</ul></div>
+        <div class="lm-compare-card lm-compare-auto"><span class="lm-mono">With agents</span><ul>${automation.automated.map(t=>`<li>${icon('check')}<span>${e(t)}</span></li>`).join('')}</ul>${split('Automate my operations','./index.html?interest=Automation#contact','lm-split-light')}</div>
+      </div>
+      <ul class="lm-areas">${automation.areas.map((a,i)=>`<li class="lm-area"><span class="lm-tile-num lm-mono">${pad(i+1)}.</span>${icon('automation','lm-tile-icon')}<h3>${e(a.title)}</h3><ul>${a.items.map(t=>`<li>${e(t)}</li>`).join('')}</ul><a href="./index.html?interest=Automation#contact" aria-label="Automate ${e(a.title)}">Automate ${e(a.title)} ${icon()}</a></li>`).join('')}</ul>
+    </section>
+
+    <section class="lm-section lm-wrap" id="healthcare" aria-labelledby="healthcare-title">
+      <div class="lm-head"><div class="lm-label-stack"><span class="lm-pill">Healthcare</span><span class="lm-mono">HL7 · RCM · Health tech</span></div><div><h2 id="healthcare-title" class="lm-display">${e(healthcare.title)} <span class="lm-dim">${e(healthcare.emphasis)}</span></h2><p>${e(healthcare.description)}</p></div></div>
+      <div class="lm-hl7">
+        <div class="lm-hl7-flow" aria-label="Your clinic app sends HL7 messages through a gateway to Malaffi, NABIDH and Riayati">
+          <div class="lm-hl7-node"><span class="lm-mono">Your system</span><strong>EMR / Clinic app</strong></div>
+          <span class="lm-hl7-line" aria-hidden="true"></span>
+          <div class="lm-hl7-node lm-hl7-gateway"><span class="lm-mono">HL7 gateway</span><strong>Validate · Queue · ACK</strong></div>
+          <span class="lm-hl7-line" aria-hidden="true"></span>
+          <ul class="lm-hl7-portals">${healthcare.exchanges.map(x=>`<li><strong>${e(x.name)}</strong><span>${e(x.region)} · ${e(x.authority)}</span></li>`).join('')}</ul>
+        </div>
+        <ul class="lm-hl7-messages">${healthcare.messages.map(m=>`<li>${icon('check')}<span>${e(m)}</span></li>`).join('')}</ul>
+        <p class="lm-hl7-note">${e(healthcare.note)}</p>
+      </div>
+      <div class="lm-health-grid">
+        <div class="lm-compare-card lm-compare-auto lm-rcm"><span class="lm-mono">${e(healthcare.rcm.title)}</span><h3>${e(healthcare.rcm.lead)}</h3><ul>${healthcare.rcm.items.map(t=>`<li>${icon('check')}<span>${e(t)}</span></li>`).join('')}</ul>${split('Discuss the RCM app','./index.html?interest=RCM#contact','lm-split-light')}</div>
+        <div class="lm-support"><span class="lm-mono">Health tech support apps</span><ul>${healthcare.support.map(a=>`<li><strong>${e(a.title)}</strong><span>${e(a.text)}</span></li>`).join('')}</ul>${split('Connect my clinic','./index.html?interest=Healthcare%20Integration#contact')}</div>
+      </div>
     </section>
 
     <section class="lm-section lm-wrap" id="solutions" aria-labelledby="software-title">
