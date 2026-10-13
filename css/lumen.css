@@ -217,3 +217,31 @@ h1 em,h2 em,h3 em{font-family:inherit;font-style:normal;color:var(--lm-dim)}
   .lm-block::after{display:none}
   .lm-word{color:var(--text);transition:none}
 }
+
+/* Personal Agent: checklist, example conversation, connector strip */
+.lm-agent-grid{display:grid;grid-template-columns:43% 1fr;gap:30px;align-items:start}
+.lm-checks{display:flex;flex-direction:column;gap:18px;margin-bottom:40px;max-width:440px}
+.lm-checks li{display:flex;gap:14px;align-items:flex-start;font-size:16px;line-height:1.5;color:var(--text)}
+.lm-checks svg{flex-shrink:0;width:16px;height:16px;margin-top:4px;padding:3px;box-sizing:content-box;border-radius:50%;background:color-mix(in srgb,#8b6cff 22%,transparent);color:#a68bff}
+.lm-agent-chat{margin:0;padding:clamp(20px,2.2vw,32px);background:var(--surface);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:16px}
+.lm-chat-head{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.lm-chat-head strong{font-weight:500;font-size:15px}
+.lm-chat-head .lm-mono{margin-left:auto;font-size:10px}
+.lm-chat-dot{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b18cff,#6d4cff 70%);box-shadow:0 0 0 3px rgba(140,100,255,.2)}
+.lm-bubble{font-size:15px;line-height:1.55;border-radius:12px;padding:14px 18px;max-width:92%}
+.lm-bubble-user{align-self:flex-end;background:var(--text);color:var(--bg)}
+.lm-bubble-agent{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
+.lm-bubble-agent p{color:var(--text)}
+.lm-bubble-agent ul{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.lm-bubble-agent li{display:flex;gap:12px;align-items:baseline;color:var(--muted);font-size:14px}
+.lm-source{flex-shrink:0;min-width:78px;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+.lm-connectors{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;margin-top:clamp(50px,5vw,80px);background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.lm-connectors li{display:flex;flex-direction:column;gap:6px;padding:24px 20px;background:var(--bg)}
+.lm-connector-icon{width:26px;height:26px;margin-bottom:14px;stroke-width:1.2}
+.lm-connectors strong{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.lm-connectors span{font-size:13px;line-height:1.45;color:var(--muted)}
+.lm-connectors .lm-connector-hub{background:linear-gradient(140deg,#7a5cff,#b07cff);color:#fff}
+.lm-connector-hub span{color:rgba(255,255,255,.82)}
+@media(max-width:1100px){.lm-connectors{grid-template-columns:repeat(4,1fr)}.lm-connectors .lm-connector-hub{grid-column:span 2}}
+@media(max-width:900px){.lm-agent-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.lm-connectors{grid-template-columns:repeat(2,1fr)}.lm-bubble{max-width:100%}.lm-chat-head .lm-mono{display:none}}

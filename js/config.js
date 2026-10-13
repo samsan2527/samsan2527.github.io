@@ -8,7 +8,7 @@ export const config = {
   email: 'samsanthosh2596@gmail.com',
   linkedin: 'https://www.linkedin.com/in/samsan2527',
   siteUrl: '', // e.g. https://username.github.io/repo-name (no trailing slash)
-  web3formsKey: 'WEB3FORMS_KEY',
+  web3formsKey: '7360d7c8-bd3e-404f-8bc9-238d52b6ec3f',
   notifyOnVisit: false,
   availability: 'Open for select projects',
   enableAurora: true,

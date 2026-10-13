@@ -18,7 +18,9 @@ const iconPaths = {
   software: '<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18m-14 5 3 2-3 2m6 0h4"/>',
   copy: '<rect x="8" y="8" width="12" height="13" rx="1"/><path d="M16 8V3H3v13h5"/>',
   menu: '<path d="M4 8h16M4 16h16"/>', search: '<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/>',
-  input: '<path d="M3 5h18v14H3zM3 10h18M8 14h2m3 0h3"/>', systems: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M14 6h4v8M6 10v8h8"/>',
+  input: '<path d="M3 5h18v14H3zM3 10h18M8 14h2m3 0h3"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7"/>', calendar: '<rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 10h18M8 3v4m8-4v4"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4Z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>', task: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="m8 12 3 3 5-6"/>', check: '<path d="m5 12.5 4.5 4.5L19 7"/>', systems: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M14 6h4v8M6 10v8h8"/>',
 };
 export const icon = (type='arrow', cls='') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconPaths[type] || iconPaths.arrow}</svg>`;
 const tags = items => `<div class="tags">${items.map(t => `<span class="tag">${e(t)}</span>`).join('')}</div>`;

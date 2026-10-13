@@ -1,5 +1,5 @@
 import { config } from './config.js';
-import { content, solutions, aiApplications, simpleDescriptions, mobileApps } from './data.js';
+import { content, solutions, aiApplications, simpleDescriptions, mobileApps, personalAgent } from './data.js';
 
 const software=solutions.filter(s=>s.id!=='mobile');
 const pad=n=>String(n).padStart(2,'0');
@@ -47,6 +47,22 @@ export function renderShowcase({e,icon,contactSection}) {
         </div>
       </div>
       <ul class="lm-tiles">${tiles.map(t=>`<li><a href="${t.href}"><span class="lm-tile-num lm-mono">${t.n}.</span>${icon(t.icon,'lm-tile-icon')}<span class="lm-tile-copy"><strong>${e(t.title)}</strong><span>${e(t.text)}</span></span></a></li>`).join('')}</ul>
+    </section>
+
+    <section class="lm-section lm-wrap lm-agent" id="agent" aria-labelledby="agent-title">
+      <div class="lm-head"><div class="lm-label-stack"><span class="lm-pill">Personal agent</span></div><div><h2 id="agent-title" class="lm-display">${e(personalAgent.title)} <span class="lm-dim">${e(personalAgent.emphasis)}</span></h2><p>${e(personalAgent.description)}</p></div></div>
+      <div class="lm-agent-grid">
+        <div class="lm-agent-copy">
+          <ul class="lm-checks">${personalAgent.points.map(p=>`<li>${icon('check')}<span>${e(p)}</span></li>`).join('')}</ul>
+          ${split('Ask about Personal Agent','./index.html?interest=Personal%20Agent#contact')}
+        </div>
+        <figure class="lm-agent-chat">
+          <figcaption class="lm-chat-head"><span class="lm-chat-dot" aria-hidden="true"></span><strong>Personal Agent</strong><span class="lm-mono">Example · ${personalAgent.connectors.length} apps connected</span></figcaption>
+          <p class="lm-bubble lm-bubble-user">${e(personalAgent.example.prompt)}</p>
+          <div class="lm-bubble lm-bubble-agent"><p>${e(personalAgent.example.reply)}</p><ul>${personalAgent.example.items.map(([source,text])=>`<li><span class="lm-source">${e(source)}</span>${e(text)}</li>`).join('')}</ul></div>
+        </figure>
+      </div>
+      <ul class="lm-connectors" aria-label="Apps the Personal Agent connects to">${personalAgent.connectors.map(c=>`<li>${icon(c.icon,'lm-connector-icon')}<strong>${e(c.name)}</strong><span>${e(c.detail)}</span></li>`).join('')}<li class="lm-connector-hub">${icon('ai','lm-connector-icon')}<strong>One agent</strong><span>No switching between portals</span></li></ul>
     </section>
 
     <section class="lm-section lm-wrap" id="solutions" aria-labelledby="software-title">
